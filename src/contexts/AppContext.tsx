@@ -53,6 +53,28 @@ export function AppProvider({ children }: { children: ReactNode }) {
   );
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedCart = localStorage.getItem('shopping-cart');
+      if (savedCart) {
+        try {
+          const parsedCart = JSON.parse(savedCart);
+          if (Array.isArray(parsedCart)) {
+            setCart(parsedCart);
+          }
+        } catch (error) {
+          console.error('Error loading cart from localStorage:', error);
+        }
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('shopping-cart', JSON.stringify(cart));
+    }
+  }, [cart]);
+
+  useEffect(() => {
     loadProducts().then(setProducts);
   }, []);
 
@@ -97,7 +119,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
       value={{
         cart,
         addToCart,
-        clearCart: () => setCart([]),
+        clearCart: () => {
+          setCart([]);
+          if (typeof window !== 'undefined') {
+            localStorage.removeItem('shopping-cart');
+          }
+        },
         locale,
         setLocale,
         products,
