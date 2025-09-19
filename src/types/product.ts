@@ -19,4 +19,7 @@ export interface Locale {
   currencySymbol: string;
   region: string;
   language: string;
+  country: string;
+  countryCode: string;
+  displayName: string;
 }

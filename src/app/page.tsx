@@ -1,63 +1,12 @@
 'use client';
+
 import { useEffect } from 'react';
-import { useApp } from '@/contexts/AppContext';
-import ProductCard from '@/components/ProductCard';
-import Cart from '@/components/Cart';
-import LocaleSwitcher from '@/components/LocaleSwitcher';
-import Link from 'next/link';
-import styles from './page.module.css';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const {
-    setLocale,
-    products,
-    loadMoreProducts,
-    isLoadingMore,
-    moreProductsError,
-  } = useApp();
+  const router = useRouter();
 
-  useEffect(() => {
-    setLocale({
-      currency: 'GBP',
-      currencySymbol: '£',
-      region: 'UK',
-      language: 'en-GB',
-    });
-  }, [setLocale]);
+  useEffect(() => router.push('/int/en-gb'), [router]);
 
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>Michael&apos;s Amazing Web Store</p>
-        <div>
-          <LocaleSwitcher />
-          <Link href="/checkout" style={{ textDecoration: 'none' }}>
-            <Cart />
-          </Link>
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        {Array.isArray(products) &&
-          products.map((product, index) => (
-            <ProductCard key={`${product.id}-${index}`} product={product} />
-          ))}
-      </div>
-
-      <div className={styles.loadMore}>
-        <button
-          onClick={loadMoreProducts}
-          disabled={isLoadingMore}
-          className={styles.loadMoreButton}
-        >
-          {isLoadingMore ? 'Loading...' : 'Load More Products'}
-        </button>
-        {moreProductsError && (
-          <p style={{ color: 'red', marginTop: '10px' }}>
-            Error: {moreProductsError}
-          </p>
-        )}
-      </div>
-    </main>
-  );
+  return <>Redirecting to international store...</>;
 }

@@ -1,13 +1,19 @@
 'use client';
-import { useEffect } from 'react';
+
 import { useApp } from '@/contexts/AppContext';
 import ProductCard from '@/components/ProductCard';
-import Cart from '@/components/Cart';
 import LocaleSwitcher from '@/components/LocaleSwitcher';
+import Cart from '@/components/Cart';
 import Link from 'next/link';
+import { useParams, notFound } from 'next/navigation';
+import { useEffect } from 'react';
+import { getLocaleBySlug, isValidLocale } from '@/constants/locales';
 import styles from '../page.module.css';
 
-export default function USPage() {
+export default function InternationalPage() {
+  const params = useParams();
+  const slug = params.slug as string;
+
   const {
     setLocale,
     products,
@@ -16,25 +22,34 @@ export default function USPage() {
     moreProductsError,
   } = useApp();
 
+  if (!isValidLocale(slug)) {
+    notFound();
+  }
+
+  const locale = getLocaleBySlug(slug);
+
   useEffect(() => {
-    // Set US locale when this page loads
-    setLocale({
-      currency: 'USD',
-      currencySymbol: '$',
-      region: 'US',
-      language: 'en-US',
-    });
-  }, [setLocale]);
+    if (locale) {
+      setLocale({
+        ...locale,
+        displayName: locale.label,
+      });
+    }
+  }, [locale, setLocale]);
+
+  if (!locale) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <p>Michael's Amazing Web Store - US</p>
-        <div>
-          <LocaleSwitcher />
-          <Link href="/checkout">
+        <p>Michael's Amazing Web Store</p>
+        <div style={{ display: 'flex' }}>
+          <Link href="/checkout" style={{ textDecoration: 'none' }}>
             <Cart />
           </Link>
+          <LocaleSwitcher />
         </div>
       </div>
 

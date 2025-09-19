@@ -7,7 +7,7 @@ import {
   ReactNode,
 } from 'react';
 import { Product, CartItem, Locale } from '@/types/product';
-import { LOCALES } from '@/constants/locales';
+import { LOCALES, getDefaultLocale } from '@/constants/locales';
 
 interface AppContextType {
   cart: CartItem[];
@@ -49,7 +49,7 @@ const loadProductsSync = async (): Promise<Product[]> => {
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [locale, setLocale] = useState<Locale>(LOCALES.UK);
+  const [locale, setLocale] = useState<Locale>(getDefaultLocale());
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [moreProductsError, setMoreProductsError] = useState<string | null>(
