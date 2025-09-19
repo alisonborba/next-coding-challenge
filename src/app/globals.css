@@ -105,3 +105,18 @@ a {
     color-scheme: dark;
   }
 }
+
+.btn-basket {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border: 1px solid rgba(var(--card-border-rgb), 0.3);
+  border-radius: var(--border-radius);
+  /* font-size: 1rem; */
+  /* font-weight: 600; */
+  transition: background 200ms, border 200ms;
+}
+
+.btn-basket:hover {
+  background: rgba(var(--card-rgb), 0.1);
+  border: 1px solid rgba(var(--card-border-rgb), 0.5);
+}

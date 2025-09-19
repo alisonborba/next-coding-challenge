@@ -5,9 +5,9 @@ import ProductCard from '@/components/ProductCard';
 import Cart from '@/components/Cart';
 import LocaleSwitcher from '@/components/LocaleSwitcher';
 import Link from 'next/link';
-import styles from './page.module.css';
+import styles from '../page.module.css';
 
-export default function Home() {
+export default function USPage() {
   const {
     setLocale,
     products,
@@ -17,21 +17,22 @@ export default function Home() {
   } = useApp();
 
   useEffect(() => {
+    // Set US locale when this page loads
     setLocale({
-      currency: 'GBP',
-      currencySymbol: '£',
-      region: 'UK',
-      language: 'en-GB',
+      currency: 'USD',
+      currencySymbol: '$',
+      region: 'US',
+      language: 'en-US',
     });
   }, [setLocale]);
 
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <p>Michael&apos;s Amazing Web Store</p>
+        <p>Michael's Amazing Web Store - US</p>
         <div>
           <LocaleSwitcher />
-          <Link href="/checkout" style={{ textDecoration: 'none' }}>
+          <Link href="/checkout">
             <Cart />
           </Link>
         </div>

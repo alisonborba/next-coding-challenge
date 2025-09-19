@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
+  padding: 2em;
   min-height: 100vh;
 }
 
@@ -36,9 +36,10 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(25%, auto));
+  grid-template-columns: repeat(4, 1fr);
   max-width: 100%;
-  width: var(--max-width);
+  width: 100%;
+  gap: 1.5rem;
 }
 
 .basket,
@@ -97,10 +98,11 @@
   }
 
   .grid {
-    /* TODO Look up how to make a single column list*/
+    grid-template-columns: 1fr;
     margin-bottom: 120px;
     max-width: 320px;
     text-align: center;
+    gap: 1rem;
   }
 
   .basket,
@@ -162,6 +164,44 @@
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
   .grid {
-    /* TODO Look up how to make a 2 column list*/
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
   }
 }
+
+.moreProducts {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.moreProducts h2 {
+  margin-bottom: 2rem;
+  color: var(--foreground-rgb);
+}
+
+.loadMore {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.loadMoreButton {
+  padding: 1rem 2rem;
+  background: rgba(var(--card-rgb), 0.1);
+  border: 1px solid rgba(var(--card-border-rgb), 0.3);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: background 200ms, border 200ms;
+}
+
+.loadMoreButton:hover:not(:disabled) {
+  background: rgba(var(--card-rgb), 0.2);
+  border: 1px solid rgba(var(--card-border-rgb), 0.5);
+}
+
+.loadMoreButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
