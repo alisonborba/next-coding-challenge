@@ -1,6 +1,6 @@
 'use client';
 import { useApp } from '@/contexts/AppContext';
-import { formatPrice } from '@/utils/currency';
+import { formatPrice, getProductPrice, getProductName } from '@/utils/currency';
 import Link from 'next/link';
 import styles from './page.module.css';
 
@@ -8,12 +8,7 @@ export default function CheckoutPage() {
   const { cart, locale, clearCart } = useApp();
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = cart.reduce((sum, item) => {
-    const price =
-      typeof item.product.price === 'number'
-        ? item.product.price
-        : (item.product.price as any)?.usd ||
-          (item.product.price as any)?.gbp ||
-          0;
+    const price = getProductPrice(item.product.price, locale);
     return sum + price * item.quantity;
   }, 0);
 
@@ -37,18 +32,8 @@ export default function CheckoutPage() {
         <h1 className={styles.title}>Checkout</h1>
         <div className={styles.cartItems}>
           {cart.map((item) => {
-            const productName =
-              typeof item.product.name === 'string'
-                ? item.product.name
-                : (item.product.name as any)?.us ||
-                  (item.product.name as any)?.uk ||
-                  'Unknown Product';
-            const productPrice =
-              typeof item.product.price === 'number'
-                ? item.product.price
-                : (item.product.price as any)?.usd ||
-                  (item.product.price as any)?.gbp ||
-                  0;
+            const productName = getProductName(item.product.name, locale);
+            const productPrice = getProductPrice(item.product.price, locale);
 
             return (
               <div key={item.product.id} className={styles.cartItem}>
@@ -70,7 +55,7 @@ export default function CheckoutPage() {
         </div>
         <div className={styles.actions}>
           <Link
-            href={locale.language === 'en-gb' ? '/' : `/int/en-us`}
+            href={locale.language === 'en-GB' ? '/int/en-gb' : `/int/en-us`}
             className="btn-secondary"
           >
             Continue Shopping

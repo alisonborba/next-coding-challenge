@@ -1,6 +1,6 @@
 import { Product } from '@/types/product';
 import { useApp } from '@/contexts/AppContext';
-import { formatPrice } from '@/utils/currency';
+import { formatPrice, getProductPrice, getProductName } from '@/utils/currency';
 import { useState } from 'react';
 import styles from './ProductCard.module.css';
 
@@ -15,18 +15,9 @@ export default function ProductCard({ product }: { product: Product }) {
     setTimeout(() => setIsAdding(false), 2000);
   };
 
-  // Safely extract name and price, handling both string and object formats
-  const productName =
-    typeof product.name === 'string'
-      ? product.name
-      : (product.name as any)?.us ||
-        (product.name as any)?.uk ||
-        'Unknown Product';
-
-  const productPrice =
-    typeof product.price === 'number'
-      ? product.price
-      : (product.price as any)?.usd || (product.price as any)?.gbp || 0;
+  // Get localized name and price based on current locale
+  const productName = getProductName(product.name, locale);
+  const productPrice = getProductPrice(product.price, locale);
 
   return (
     <div className="card">

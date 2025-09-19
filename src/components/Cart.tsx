@@ -1,16 +1,11 @@
 import { useApp } from '@/contexts/AppContext';
-import { formatPrice } from '@/utils/currency';
+import { formatPrice, getProductPrice } from '@/utils/currency';
 
 export default function Cart() {
   const { cart, locale } = useApp();
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = cart.reduce((sum, item) => {
-    const price =
-      typeof item.product.price === 'number'
-        ? item.product.price
-        : (item.product.price as any)?.usd ||
-          (item.product.price as any)?.gbp ||
-          0;
+    const price = getProductPrice(item.product.price, locale);
     return sum + price * item.quantity;
   }, 0);
 
