@@ -1,7 +1,5 @@
 # Michael's NextJS E-commerce Store
 
-## Getting Started
-
 Vercel Link: [meandem-next.vercel.app](https://meandem-next.vercel.app)
 
 ## Getting Started
