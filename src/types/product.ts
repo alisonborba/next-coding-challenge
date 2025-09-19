@@ -1,12 +1,9 @@
 export interface Product {
   id: string | number;
-  name: string | { us: string; uk: string };
+  name: string;
   description?: string;
-  price: number | { usd: number; gbp: number };
+  price: number;
   currency?: string;
-  image?: string;
-  category?: string;
-  stock?: number;
 }
 
 export interface CartItem {
@@ -17,9 +14,8 @@ export interface CartItem {
 export interface Locale {
   currency: string;
   currencySymbol: string;
-  region: string;
   language: string;
   country: string;
   countryCode: string;
-  displayName: string;
+  icon: string;
 }

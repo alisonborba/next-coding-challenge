@@ -1,5 +1,4 @@
 'use client';
-
 import { useApp } from '@/contexts/AppContext';
 import { useRouter, usePathname } from 'next/navigation';
 import { LOCALES, getAvailableLocaleSlugs } from '@/constants/locales';
@@ -12,31 +11,21 @@ export default function LocaleSwitcher() {
   const handleLocaleChange = (localeSlug: string) => {
     const newLocale = LOCALES[localeSlug];
     if (newLocale) {
-      setLocale({ ...newLocale, displayName: localeSlug });
-
-      if (pathname.startsWith('/int/')) {
-        router.push(`/int/${localeSlug}`);
-      } else if (pathname === '/') {
-        router.push(`/int/${localeSlug}`);
-      } else {
-        router.push(`/int/${localeSlug}`);
-      }
+      setLocale(newLocale);
+      router.push(`/int/${localeSlug}`);
     }
   };
 
-  // Get available locale slugs
-  const availableLocales = getAvailableLocaleSlugs();
-
   return (
     <>
-      {availableLocales.map((localeSlug) => {
+      {getAvailableLocaleSlugs().map((localeSlug) => {
         const localeConfig = LOCALES[localeSlug];
         const isActive = locale?.countryCode === localeConfig.countryCode;
-
         return (
           <button
-            title={localeConfig.country}
             key={localeSlug}
+            title={localeConfig.country}
+            onClick={() => handleLocaleChange(localeSlug)}
             style={{
               cursor: 'pointer',
               background: 'transparent',
@@ -45,7 +34,6 @@ export default function LocaleSwitcher() {
               marginLeft: '1rem',
               display: isActive ? 'none' : 'block',
             }}
-            onClick={() => handleLocaleChange(localeSlug)}
           >
             {localeConfig.icon}
           </button>

@@ -1,5 +1,4 @@
 'use client';
-
 import { useApp } from '@/contexts/AppContext';
 import ProductCard from '@/components/ProductCard';
 import LocaleSwitcher from '@/components/LocaleSwitcher';
@@ -13,7 +12,6 @@ import styles from '../page.module.css';
 export default function InternationalPage() {
   const params = useParams();
   const slug = params.slug as string;
-
   const {
     setLocale,
     products,
@@ -22,29 +20,19 @@ export default function InternationalPage() {
     moreProductsError,
   } = useApp();
 
-  if (!isValidLocale(slug)) {
-    notFound();
-  }
+  if (!isValidLocale(slug)) notFound();
 
   const locale = getLocaleBySlug(slug);
-
   useEffect(() => {
-    if (locale) {
-      setLocale({
-        ...locale,
-        displayName: locale.label,
-      });
-    }
+    if (locale) setLocale(locale);
   }, [locale, setLocale]);
 
-  if (!locale) {
-    return <div>Loading...</div>;
-  }
+  if (!locale) return <div>Loading...</div>;
 
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <p>Michael's Amazing Web Store</p>
+        <p>Michael&apos;s Amazing Web Store</p>
         <div style={{ display: 'flex' }}>
           <Link href="/checkout" style={{ textDecoration: 'none' }}>
             <Cart />
@@ -52,14 +40,11 @@ export default function InternationalPage() {
           <LocaleSwitcher />
         </div>
       </div>
-
       <div className={styles.grid}>
-        {Array.isArray(products) &&
-          products.map((product, index) => (
-            <ProductCard key={`${product.id}-${index}`} product={product} />
-          ))}
+        {products.map((product, index) => (
+          <ProductCard key={`${product.id}-${index}`} product={product} />
+        ))}
       </div>
-
       <div className={styles.loadMore}>
         <button
           onClick={loadMoreProducts}
