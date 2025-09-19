@@ -2,7 +2,6 @@ import { Product } from '@/types/product';
 import { useApp } from '@/contexts/AppContext';
 import { formatPrice, getProductPrice, getProductName } from '@/utils/currency';
 import { useState } from 'react';
-import styles from './ProductCard.module.css';
 
 export default function ProductCard({ product }: { product: Product }) {
   const { addToCart, locale } = useApp();

@@ -1,11 +1,10 @@
 'use client';
 import { useApp } from '@/contexts/AppContext';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { LOCALES, getAvailableLocaleSlugs } from '@/constants/locales';
 
 export default function LocaleSwitcher() {
   const router = useRouter();
-  const pathname = usePathname();
   const { locale, setLocale } = useApp();
 
   const handleLocaleChange = (localeSlug: string) => {
