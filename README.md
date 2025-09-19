@@ -1,28 +1,71 @@
-# Michael's NextJS Coding Challenge
+# Michael's NextJS E-commerce Store
 
-## The Challenge:
-Some newb has made a mess of this code. There are TODOs that need finishing off, broken and questionable tests and the code itself is inefficient.  
-Please fix up whatever mess you find to get this piece of work working well.
-
-### Extended tasks
-
-- Our Product Manager wants a new 'checkout' page which should detail all of the items in the basket with their quantity and a total item quantity. Create this page.
-- We've launched our new product API - <https://v0-api-endpoint-request.vercel.app/api/products> - can you please migrate the site to use the products from here - UK only for now. Our CTO is adamant that products should be available as soon as the page loads - no loading spinners.
-- We've released a way of getting some more products. Its a bit slow so these can be displayed to the user after the initial products load please <https://v0-api-endpoint-request.vercel.app/api/more-products>
-- We're launching in the states! When the user navigates to /us, prices should be displayed in dollars (USD) instead of GBP, and text should be localized for US users. Ensure the solution is scalable for future regions (e.g., Europe, Asia). Consider how you would handle currency formatting, locale-specific content, and dynamic routing.
-- Run your applications tests when you push the branch to github
-- Deploy your application when you push the branch to github
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-### Getting Started
-
-First, `npm install`, then run the development server:
+## 🛠️ Getting Started
 
 ```bash
+npm install
+
 npm run dev
+
+npm test
+
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-Run the testing and linting with `npm run test` and `npm run lint`.
+## 🌍 Internationalization
+
+The app supports multiple locales through dynamic routing:
+
+- **UK**: `/int/en-gb` (GBP, English)
+- **US**: `/int/en-us` (USD, English)
+
+Easy to extend with additional locales by updating `src/constants/locales.ts`.
+
+## Cart Persistence
+
+Cart data is saved to localStorage and restored on page load, providing a shopping experience across sessions.
+
+## Future Improvements / Productionise
+
+### State Management
+
+- **Zustand**: Replace React Context with Zustand for better performance and developer experience
+- **Redux Toolkit**: Alternative for complex state management needs
+
+### Data Fetching
+
+- **TanStack Query**: Implement React Query for advanced caching, background updates, and optimistic updates
+- **SWR**: Lightweight alternative for data fetching with built-in caching
+
+### UI/UX Enhancements
+
+- **Tailwind CSS**: Replace CSS modules with utility-first styling
+- **Framer Motion**: Add smooth animations and transitions
+- **React Hook Form**: Improve form handling and validation
+- **Zod**: Form validation
+
+### Performance
+
+- **React.memo**: Optimize component re-renders
+- **Code Splitting**: Implement lazy loading for better performance
+- **Image Optimization**: Add Next.js Image component for product images
+
+### Testing
+
+- **Playwright**: Add E2E testing
+- **Storybook**: Component documentation and testing
+
+### Monitoring
+
+- **Sentry**: Error tracking and monitoring
+- **Analytics**: User behavior tracking
+- **Performance**: Core Web Vitals monitoring
+
+## Development Notes
+
+- All API calls are handled through Next.js API routes to avoid CORS issues
+- Cart persistence uses localStorage with SSR-safe implementation
+- Responsive design follows mobile-first principles
+- TypeScript ensures type safety across the application

@@ -1,0 +1,39 @@
+/* International page specific styles - most common styles moved to globals.css */
+.description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 2rem;
+}
+
+.description p {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.loadMore {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.loadMoreButton {
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  background: transparent;
+}
+
+.loadMoreButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .description {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
