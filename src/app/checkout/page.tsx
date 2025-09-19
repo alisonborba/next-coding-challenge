@@ -19,20 +19,22 @@ export default function CheckoutPage() {
 
   if (cart.length === 0) {
     return (
-      <main className={styles.main}>
+      <main className="main">
         <div className={styles.empty}>
           <h1>Your basket is empty</h1>
           <p>Add some items to your basket to checkout</p>
-          <Link href="/">Continue Shopping</Link>
+          <Link href="/" className="btn-primary">
+            Continue Shopping
+          </Link>
         </div>
       </main>
     );
   }
 
   return (
-    <main className={styles.main}>
-      <div className={styles.container}>
-        <h1>Checkout</h1>
+    <main className="main">
+      <div className="container">
+        <h1 className={styles.title}>Checkout</h1>
         <div className={styles.cartItems}>
           {cart.map((item) => {
             const productName =
@@ -51,13 +53,11 @@ export default function CheckoutPage() {
             return (
               <div key={item.product.id} className={styles.cartItem}>
                 <div className={styles.itemInfo}>
-                  <h3>{productName}</h3>
-                  <p>{item.product.description || 'High-quality product'}</p>
+                  <span className={styles.quantity}>
+                    {item.quantity} - {productName}
+                  </span>
                 </div>
-                <span className={styles.quantity}>{item.quantity}</span>
-                <div className={styles.itemTotal}>
-                  {formatPrice(productPrice * item.quantity, locale)}
-                </div>
+                <div>{formatPrice(productPrice * item.quantity, locale)}</div>
               </div>
             );
           })}
@@ -69,8 +69,14 @@ export default function CheckoutPage() {
           </div>
         </div>
         <div className={styles.actions}>
-          <Link href="/">Continue Shopping</Link>
+          <Link
+            href={locale.language === 'en-gb' ? '/' : `/int/en-us`}
+            className="btn-secondary"
+          >
+            Continue Shopping
+          </Link>
           <button
+            className="btn-success"
             onClick={() => {
               alert(`Order placed! Total: ${formatPrice(totalPrice, locale)}`);
               clearCart();

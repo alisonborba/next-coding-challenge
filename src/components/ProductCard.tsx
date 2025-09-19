@@ -29,12 +29,14 @@ export default function ProductCard({ product }: { product: Product }) {
       : (product.price as any)?.usd || (product.price as any)?.gbp || 0;
 
   return (
-    <div className={styles.card}>
+    <div className="card">
       <h2>{productName}</h2>
       <p>{product.description || 'High-quality product'}</p>
-      <div className={styles.price}>{formatPrice(productPrice, locale)}</div>
+      <div style={{ fontWeight: '600', fontSize: '1.1rem', marginTop: 'auto' }}>
+        {formatPrice(productPrice, locale)}
+      </div>
       <button
-        className={`${styles.addButton} ${isAdding ? styles.added : ''}`}
+        className={`btn-outline ${isAdding ? 'btn-success' : ''}`}
         onClick={handleAddToCart}
         disabled={isAdding}
       >

@@ -30,7 +30,7 @@ export default function InternationalPage() {
   if (!locale) return <div>Loading...</div>;
 
   return (
-    <main className={styles.main}>
+    <main className="main">
       <div className={styles.description}>
         <p>Michael&apos;s Amazing Web Store</p>
         <div style={{ display: 'flex' }}>
@@ -40,7 +40,7 @@ export default function InternationalPage() {
           <LocaleSwitcher />
         </div>
       </div>
-      <div className={styles.grid}>
+      <div className="grid">
         {products.map((product, index) => (
           <ProductCard key={`${product.id}-${index}`} product={product} />
         ))}
