@@ -7,13 +7,11 @@ import {
   ReactNode,
 } from 'react';
 import { Product, CartItem, Locale } from '@/types/product';
-import { LOCALES, getDefaultLocale } from '@/constants/locales';
+import { getDefaultLocale } from '@/constants/locales';
 
 interface AppContextType {
   cart: CartItem[];
   addToCart: (product: Product) => void;
-  removeFromCart: (productId: string) => void;
-  updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
   locale: Locale;
   setLocale: (locale: Locale) => void;
@@ -135,10 +133,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     loadMoreProducts,
     moreProductsError,
   };
-
-  // Debug logging
-  console.log('AppContext - locale:', locale);
-  console.log('AppContext - products:', products);
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }

@@ -30,10 +30,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     setIsAdding(true);
     addToCart(product);
 
-    // Re-enable button after 5 seconds
-    setTimeout(() => {
-      setIsAdding(false);
-    }, 5000);
+    setTimeout(() => setIsAdding(false), 2000);
   };
 
   return (
@@ -47,7 +44,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         disabled={isAdding}
         aria-label={`Add ${productName} to basket`}
       >
-        {isAdding ? 'Added to Cart' : 'Add to Cart'}
+        {isAdding ? 'Added!' : 'Add to Cart'}
       </button>
     </div>
   );
