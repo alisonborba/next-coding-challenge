@@ -78,24 +78,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const removeFromCart = (productId: string) => {
-    setCart((prevCart) =>
-      prevCart.filter((item) => item.product.id !== productId)
-    );
-  };
-
-  const updateQuantity = (productId: string, quantity: number) => {
-    if (quantity <= 0) {
-      removeFromCart(productId);
-      return;
-    }
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.product.id === productId ? { ...item, quantity } : item
-      )
-    );
-  };
-
   const clearCart = () => {
     setCart([]);
   };
@@ -145,8 +127,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const value = {
     cart,
     addToCart,
-    removeFromCart,
-    updateQuantity,
     clearCart,
     locale,
     setLocale,

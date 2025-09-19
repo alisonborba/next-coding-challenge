@@ -5,7 +5,7 @@ import Link from 'next/link';
 import styles from './page.module.css';
 
 export default function CheckoutPage() {
-  const { cart, updateQuantity, removeFromCart, locale, clearCart } = useApp();
+  const { cart, locale, clearCart } = useApp();
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = cart.reduce((sum, item) => {
@@ -14,7 +14,6 @@ export default function CheckoutPage() {
   }, 0);
 
   const handleCheckout = () => {
-    // In a real app, this would process the payment
     alert(`Order placed! Total: ${formatPrice(totalPrice, locale)}`);
     clearCart();
   };
@@ -51,39 +50,9 @@ export default function CheckoutPage() {
                 <div className={styles.itemInfo}>
                   <h3>{productName}</h3>
                   <p>{item.product.description || 'High-quality product'}</p>
-                  <div className={styles.price}>
-                    {formatPrice(displayPrice, locale)} each
-                  </div>
                 </div>
 
-                <div className={styles.quantityControls}>
-                  <button
-                    onClick={() =>
-                      updateQuantity(String(item.product.id), item.quantity - 1)
-                    }
-                    className={styles.quantityButton}
-                    aria-label="Decrease quantity"
-                  >
-                    -
-                  </button>
-                  <span className={styles.quantity}>{item.quantity}</span>
-                  <button
-                    onClick={() =>
-                      updateQuantity(String(item.product.id), item.quantity + 1)
-                    }
-                    className={styles.quantityButton}
-                    aria-label="Increase quantity"
-                  >
-                    +
-                  </button>
-                  <button
-                    onClick={() => removeFromCart(String(item.product.id))}
-                    className={styles.removeButton}
-                    aria-label="Remove item"
-                  >
-                    Remove
-                  </button>
-                </div>
+                <span className={styles.quantity}>{item.quantity}</span>
 
                 <div className={styles.itemTotal}>
                   {formatPrice(itemTotal, locale)}

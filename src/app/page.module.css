@@ -34,14 +34,6 @@
   border-radius: var(--border-radius);
 }
 
-/* .grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  max-width: 100%;
-  width: 100%;
-  gap: 1.5rem;
-} */
-
 .basket,
 .card {
   cursor: pointer;
