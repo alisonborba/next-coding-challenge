@@ -1,6 +1,10 @@
 # Michael's NextJS E-commerce Store
 
-## 🛠️ Getting Started
+## Getting Started
+
+Vercel Link: [meandem-next.vercel.app](https://meandem-next.vercel.app)
+
+## Getting Started
 
 ```bash
 npm install
@@ -14,7 +18,7 @@ npm run build
 
 Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-## 🌍 Internationalization
+## Internationalization
 
 The app supports multiple locales through dynamic routing:
 
